@@ -1,3 +1,11 @@
+<?php
+
+require 'koneksi.php';
+
+$posts = getdata("SELECT * FROM article");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 
@@ -43,7 +51,7 @@
     </nav>
 
     <!-- Landing Section -->
-    <section class="h-screen flex items-center justify-center text-center bg-[url('./../src/img/landing.png')] bg-cover bg-center text-white bg-fixed">
+    <section class="h-screen flex items-center justify-center text-center bg-gradient-to-br from-blue-700 to-white text-white bg-fixed">
         <div>
             <p class="text-sm">MOTTO</p>
             <h1 class="font-bold text-3xl md:text-5xl mt-4">
@@ -123,9 +131,36 @@
         <a href="./carousel.html" class="mt-8 inline-block bg-blue-600 text-white py-2 px-6 rounded-full shadow-md hover:bg-blue-700">View More</a>
     </div>
 </section>
+<section id="berita" class="py-16 px-8 bg-gray-50">
+        <div class="mb-10"></div>
+        <div class="container mx-auto md:p-10">
+            <h2 class="font-bold text-2xl md:text-4xl text-blue-600 text-center mb-8">Berita</h2>
 
-        
+     
+            <hr class="text-2xl text-black mb-10">
+            
+            <!-- Latest News Section -->
+            <div>
+                <h3 class="text-xl md:text-2xl font-semibold text-gray-700">Berita Terbaru</h3>
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-3 latest-news-grid gap-6">
+                    <!-- News Item 1 -->
+                    <?php foreach($posts as $post): ?>
+                    <div class="bg-white shadow-lg  overflow-hidden news-card truncate">
+                        <img src="./src/img/<?= $post['image']?>" alt="News 1" class="w-full  object-cover">
+                        <div class="p-4">
+                            <h4 class="text-lg font-semibold text-blue-600"><?= $post ['title']?></h4>
+                            <p class="mt-2 text-gray-600"><?= $post ['content']?></p>
+                            <a href="./berita1.html" class="mt-4 inline-block text-blue-600 hover:text-blue-700">Baca Selengkapnya &rarr;</a>
+                        </div>
+                    </div>
+                    <?php endforeach?>
+                </div>
+            </div>
+            
+        </div>
+
     </section>
+        
 
     <!-- Footer -->
 <footer id="contact" class="bg-slate-200 py-8">
@@ -188,8 +223,6 @@
         </div>
     </div>
 </footer>
-
-
     <script>
         const menuBtn = document.getElementById('menu-btn');
         const menu = document.getElementById('menu');
@@ -219,6 +252,5 @@
     <script>
         AOS.init();
       </script>
-</body>
-
+      </body>
 </html>
